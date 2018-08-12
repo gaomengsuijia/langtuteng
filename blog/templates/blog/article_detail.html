@@ -1,0 +1,8 @@
+{% extends 'blog/base.html' %}
+{% block title %}文章详情{% endblock %}
+{% block body %}
+{% autoescape off %}
+    {{ article.body }}
+    {% endautoescape %}
+
+{% endblock %}
