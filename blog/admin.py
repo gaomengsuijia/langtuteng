@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from .models import Article,ArticleColumn
+admin.site.site_header = "狼图腾的博客"
 
 
 class ArticleAdmin(admin.ModelAdmin):

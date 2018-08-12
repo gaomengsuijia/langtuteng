@@ -20,8 +20,6 @@ class ArticleColumn(models.Model):
         verbose_name_plural = '文章栏目'
 
 
-
-
 class Article(models.Model):
     """
     文章
@@ -32,6 +30,7 @@ class Article(models.Model):
     body = models.TextField(verbose_name="文章详情")
     create_time = models.DateField(auto_now_add=True, verbose_name="创建时间")
     update_time = models.DateField(verbose_name="修改时间",blank=True,null=True)
+    delflag = models.CharField(verbose_name="删除标志",default=0,max_length=2)
 
     def __str__(self):
         return self.title
