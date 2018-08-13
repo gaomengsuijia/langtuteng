@@ -1,8 +1,17 @@
 {% extends 'blog/base.html' %}
 {% block title %}文章详情{% endblock %}
 {% block body %}
-{% autoescape off %}
-    {{ article.body }}
-    {% endautoescape %}
+<div class="container">
+    <div class="row" >
+        <div class="col-xs-6 col-sm-3 col-md-12">
+            {% autoescape off %}
+                {{ article.body }}
+            {% endautoescape %}
+        </div>
+
+    </div>
+
+</div>
+
 
 {% endblock %}

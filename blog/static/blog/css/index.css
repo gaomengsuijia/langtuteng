@@ -44,6 +44,9 @@ body{
     min-height: 10px;
     _height: 10px;
 }
+.list-group-item a.article_title{
+    font-weight: bold;
+}
 .list-group-item a.article_title:hover{
     cursor: pointer;
 }
@@ -65,4 +68,7 @@ body{
 }
 .right-info{
     margin-top: 10px;
+}
+.pagination a{
+    color: #666;
 }

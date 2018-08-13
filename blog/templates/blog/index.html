@@ -5,12 +5,13 @@
     <div class="row" >
         <div class="col-xs-6 col-sm-3 col-md-9">
             <ul class="list-group">
+                {% for article in contacts %}
             <li class="list-group-item">
                 <div>
-                    <div><a class="h3 article_title">我是标题</a></div>
+                    <div><a href="{% url 'blog:index' article.id %}" class="h3 article_title" target="_blank">{{ article.title }}</a></div>
                     <div class="article_content">
-                        免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册免费域名注册
-                        <a href="#" class="read_full">阅读全文</a>
+                        {{ article.summary | slice:'70' }}
+                        <a href="{% url 'blog:index' article.id %}" class="read_full">阅读全文</a>
                     </div>
                     <div class="article_talk">
                         <span class="article_publishtime">2018.8.7</span>
@@ -20,11 +21,25 @@
                     <div style="clear: both"></div>
                 </div>
             </li>
+                {% endfor %}
             <li class="list-group-item">免费 Window 空间托管</li>
             <li class="list-group-item">图像的数量</li>
             <li class="list-group-item">24*7 支持</li>
             <li class="list-group-item">每年更新成本</li>
             </ul>
+
+        <!--分页开始-->
+        <div class="pagination" style="float: right">
+            <ul class="pager">
+            {% if page.has_previous %}
+                <li><a href="?page={{ page.previous_page_number }}">上一页</a></li>
+            {% endif %}
+            {% if page.has_next %}
+                <li><a href="?page={{ page.next_page_number }}">下一页</a></li>
+            {% endif %}
+            </ul>
+        </div>
+        <!--分页结束-->
         </div>
         <div class="col-xs-6 col-sm-3 col-md-3">
             <div class="right-info">
@@ -49,5 +64,6 @@
         </div>
 
     </div>
+
 </div>
 {% endblock %}

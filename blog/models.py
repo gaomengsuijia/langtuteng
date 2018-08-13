@@ -26,6 +26,7 @@ class Article(models.Model):
     """
     author = models.ForeignKey(User,related_name="article",verbose_name="发表者",on_delete=models.CASCADE)
     title = models.CharField(max_length=100,verbose_name="文章标题")
+    summary = models.TextField(max_length=200,verbose_name="文章概要")
     column = models.ForeignKey('ArticleColumn',verbose_name="所属栏目",on_delete=models.CASCADE)
     body = models.TextField(verbose_name="文章详情")
     create_time = models.DateField(auto_now_add=True, verbose_name="创建时间")
