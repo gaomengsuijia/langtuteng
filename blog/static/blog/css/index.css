@@ -1,4 +1,68 @@
+body{
+    background-color: #d2d8de;
+}
+#header_nav{
+    background-color: #103858;
+}
+#header_nav .container-fluid a{
+    color: #a3b2be;;
+}
+#header_nav .navbar-header a.navbar-brand{
+    color: #fff;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover{
+    background-color: #d2d8de;
+    color: #333;
+}
 .nav-login{
     float: right;
     height: 50px;
+}
+.list-inline{
+    margin-top: 10px;
+    font-size: 14px;
+}
+.list-inline .login{
+    font-size: 15px;
+    color: #777;
+
+}
+.list-inline .login:hover{
+    color: #333;
+
+}
+.container .row ul{
+    margin-top: 10px;
+}
+.container .row ul li {
+    margin-bottom: 10px;
+}
+.list-group-item{
+    background-color: rgb(255, 255, 255);
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 1px 1px 2px #a7a8ad;
+    min-height: 10px;
+    _height: 10px;
+}
+.list-group-item a.article_title:hover{
+    cursor: pointer;
+}
+.list-group-item .article_content{
+    color: #666;
+    margin-top: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    line-height: 1.5;
+    text-indent: 2em;
+}
+.list-group-item .article_content a.read_full{
+    text-decoration: underline;
+}
+.list-group-item .article_talk{
+    float: right;
+    margin-top: 10px;
+}
+.right-info{
+    margin-top: 10px;
 }
