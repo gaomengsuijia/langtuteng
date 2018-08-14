@@ -91,10 +91,9 @@ DATABASES = {
         'USER':'root',
         'PASSWORD':'hu2006615',
         'NAME':'langtuteng',
-        'HOST':'118.24.63.93',
+        'HOST':'localhost',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
