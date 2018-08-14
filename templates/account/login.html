@@ -1,0 +1,67 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>用户登录</title>
+        <!-- Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+        <script src="{% static 'blog/js/jquery-1.11.1.min.js' %}"></script>
+        <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+        <style>
+            /*web background*/
+            body{
+                background-color: #d2d8de;
+            }
+            .container{
+                display:table;
+                height:100%;
+                margin-top: 100px;
+            }
+
+            .row{
+                display: table-cell;
+            }
+            /* centered columns styles */
+            .row-centered {
+                text-align:center;
+            }
+            .col-centered {
+                display:inline-block;
+                float:none;
+                text-align:left;
+                margin-right:-4px;
+            }
+            .message{
+                color: #b21f2d;
+            }
+        </style>
+    </head>
+ 
+    <body>
+        <div class="container">
+            <div class="row row-centered">
+                <div class="well col-md-4 col-centered">
+                    <h2>欢迎登录</h2>
+                    <form action="{% url 'account:login' %}" method="post" role="form">
+                        {% csrf_token %}
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" id="userid" name="username" placeholder="请输入用户名"/>
+                        </div>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
+                        </div>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon message" id="sizing-addon1">{{ message }}<i class="glyphicon glyphicon-lock"></i></span>
+                        </div>
+                        <br/>
+                        <button type="submit" class="btn btn-success btn-block">登录</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

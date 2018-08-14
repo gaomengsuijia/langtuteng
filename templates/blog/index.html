@@ -55,9 +55,13 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">文章分类</h3>
                     </div>
-                    <div class="panel-body">
-                        这是一个基本的面板
-                    </div>
+                    <ul class="list-group article_cataty">
+                        {% for each_data in column_data %}
+                        <li class="list-group-item">
+                            <a href="#">{{ each_data.name }}<span>({{ each_data.num }})</span></a>
+                        </li>
+                    {% endfor %}
+                    </ul>
                 </div>
             </div>
 
