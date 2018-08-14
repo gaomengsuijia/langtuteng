@@ -1,8 +1,9 @@
 from django.shortcuts import render,HttpResponseRedirect
-from django.http import HttpResponse
 from django.urls import reverse
-from .forms import LoginForm
+from .forms import LoginForm,RegisterForm,AcountForm
 from django.contrib.auth import authenticate,login,logout
+from .models import Account
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -48,4 +49,19 @@ def register(request):
     :param request:
     :return:
     """
-    pass
+    if request.method == "POST":
+        registform = RegisterForm(request.POST)
+        acountform = AcountForm(request.POST)
+        if registform.is_valid()*acountform.is_valid():
+            new_user = registform.save(commit=False)
+            new_user.set_password(registform.cleaned_data['password'])
+            new_user.save()
+            new_acount = acountform.save(commit=False)
+            new_acount.user = new_user
+            new_acount.save()
+            return HttpResponseRedirect(reverse('blog:index'))
+        else:
+            return render(request,'account/register.html',{'message':'error'})
+
+    else:
+        return render(request,'account/register.html')
