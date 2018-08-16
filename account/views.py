@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect
+from django.http import JsonResponse
 from django.urls import reverse
 from .forms import LoginForm,RegisterForm,AcountForm
 from django.contrib.auth import authenticate,login,logout
@@ -53,15 +54,19 @@ def register(request):
         registform = RegisterForm(request.POST)
         acountform = AcountForm(request.POST)
         if registform.is_valid()*acountform.is_valid():
+            user = User.objects.filter(username=registform.cleaned_data['username'])
+            if user:
+                #已存在用户
+                return JsonResponse({"code":20002})
             new_user = registform.save(commit=False)
             new_user.set_password(registform.cleaned_data['password'])
             new_user.save()
             new_acount = acountform.save(commit=False)
             new_acount.user = new_user
             new_acount.save()
-            return HttpResponseRedirect(reverse('blog:index'))
+            return JsonResponse({"code":20001})
         else:
-            return render(request,'account/register.html',{'message':'error'})
+            return render(request,'account/login.html')
 
     else:
         registform = RegisterForm()
