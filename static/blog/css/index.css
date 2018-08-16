@@ -4,15 +4,18 @@ body{
 #header_nav{
     background-color: #103858;
 }
+#header_nav .navbar-header a.navbar-brand {
+    font-size: 24px;
+}
 #header_nav .container-fluid a{
-    color: #a3b2be;;
+    color: #a3b2be;
+    font-size: 18px;
 }
 #header_nav .navbar-header a.navbar-brand{
     color: #fff;
 }
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover{
-    background-color: #d2d8de;
-    color: #333;
+#header_nav .container-fluid .ac a{
+    color:#fff;
 }
 .nav-login{
     float: right;

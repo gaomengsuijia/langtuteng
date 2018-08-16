@@ -64,4 +64,6 @@ def register(request):
             return render(request,'account/register.html',{'message':'error'})
 
     else:
-        return render(request,'account/register.html')
+        registform = RegisterForm()
+        acountform = AcountForm()
+        return render(request,'account/register.html',{'registform':registform,'acountform':acountform})

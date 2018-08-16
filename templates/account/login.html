@@ -1,45 +1,10 @@
+{% extends 'blog/base.html' %}
 {% load static %}
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>用户登录</title>
-        <!-- Bootstrap 核心 CSS 文件 -->
-        <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
-        <script src="{% static 'blog/js/jquery-1.11.1.min.js' %}"></script>
-        <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
-        <style>
-            /*web background*/
-            body{
-                background-color: #d2d8de;
-            }
-            .container{
-                display:table;
-                height:100%;
-                margin-top: 100px;
-            }
-
-            .row{
-                display: table-cell;
-            }
-            /* centered columns styles */
-            .row-centered {
-                text-align:center;
-            }
-            .col-centered {
-                display:inline-block;
-                float:none;
-                text-align:left;
-                margin-right:-4px;
-            }
-            .message{
-                color: #b21f2d;
-            }
-        </style>
-    </head>
- 
-    <body>
+{% block title %}用户登录{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/account.css' %}">
+{% endblock %}
+{% block body %}
         <div class="container">
             <div class="row row-centered">
                 <div class="well col-md-4 col-centered">
@@ -63,5 +28,5 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+
+{% endblock %}

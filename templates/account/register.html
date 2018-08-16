@@ -1,42 +1,79 @@
-{% extends 'account/account_base.html' %}
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}用户注册{% endblock %}
 {% block body %}
+    {% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/account.css' %}">
+    <script src="{% static 'blog/js/register.js' %}"></script>
+{% endblock %}
 <div class="container">
-            <div class="row row-centered">
-                <div class="well col-md-4 col-centered">
-                    <h2>欢迎登录</h2>
-                    <form action="{% url 'account:register' %}" method="post" role="form">
-                        {% csrf_token %}
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" maxlength="30" required/>
-                        </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon2"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="nickname" name="nickname" placeholder="请输入昵称" maxlength="30"/>
-                        </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon3"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="请输入电子邮箱" maxlength="30"/>
-                        </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon3"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号码" maxlength="11"/>
-                        </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon4"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" maxlength="20" required/>
-                        </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon5"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input type="password" class="form-control" id="password2" name="password2" placeholder="请确认密码" maxlength="20" required/>
-                        </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon message" id="sizing-addon1">{{ message }}<i class="glyphicon glyphicon-lock"></i></span>
-                        </div>
-                        <br/>
-                        <button type="submit" class="btn btn-success btn-block">注册</button>
-                    </form>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-9">
+            <h3 style="margin-left: 100px;margin-bottom: 20px">欢迎注册！</h3>
+            <form class="form-horizontal" action="{% url 'account:register' %}" method="post" id="registform">
+                {% csrf_token %}
+              <div class="form-group">
+                <label for="usename" class="col-md-5 control-label">登录名：</label>
+                  <div class="col-md-6">
+                      <input class="form-control" name="usename" id="usename" type="text" required placeholder="5-10位的字母组合">
+                      <span>*必填</span>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="col-md-5 control-label">电子邮箱：</label>
+                  <div class="col-md-6 text-left">
+                      <input class="form-control" name="email" id="email" type="text" placeholder="输入电子邮箱">
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="col-md-5 control-label">登录密码：</label>
+                  <div class="col-md-6 text-left">
+                      <input class="form-control" name="password" id="password" type="text" required placeholder="6-15位的字母,数字组合">
+                      <span>*必填</span>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password2" class="col-md-5 control-label">再次确认密码：</label>
+                  <div class="col-md-6 text-left">
+                      <input class="form-control" name="password2" id="password2" type="text" required placeholder="6-15位的字母,数字组合">
+                      <span>*必填</span>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="nickname" class="col-md-5 control-label">昵称：</label>
+                  <div class="col-md-6 text-left">
+                      <input class="form-control" name="nickname" id="nickname" type="text" required placeholder="输入昵称">
+                      <span>*必填</span>
+                  </div>
+              </div>
+                <div class="form-group">
+                <label for="{{ acountform.phone.id_for_label }}" class="col-md-5 control-label">手机号：</label>
+                    <div class="col-md-6 text-left">
+                        <input class="form-control" name="phone" id="phone" type="text" placeholder="输入手机号">
+                    </div>
+              </div>
+
+              <div class="form-group" style="text-align: center">
+                  <p id="error"></p>
+                <button class="btn btn-default btn-lg" type="button" id="regist" onclick="res()">注册</button>
+              </div>
+            </form>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3" style="margin-top: 200px">
+            <img src="{% static 'blog/images/registersideimg.png' %}" alt="图片"
+                 style="transform: translateY(-50%);
+    border-radius: 8px;" class="img-responsive">
+        </div>
+
+    </div>
+
 </div>
+{% endblock %}
+{% block script %}
+
 {% endblock %}

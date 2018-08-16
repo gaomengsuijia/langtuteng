@@ -59,7 +59,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -85,25 +85,25 @@ WSGI_APPLICATION = 'langtuteng.wsgi.application'
 # }
 
 #mysql,本地环境
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'USER':'root',
-#         'PASSWORD':'hu2006615',
-#         'NAME':'langtuteng',
-#         'HOST':'localhost',
-#     }
-# }
-#mysql,家里环境
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER':'root',
-        'PASSWORD':'123456',
+        'PASSWORD':'hu2006615',
         'NAME':'langtuteng',
         'HOST':'localhost',
     }
 }
+#mysql,家里环境
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'USER':'root',
+#         'PASSWORD':'123456',
+#         'NAME':'langtuteng',
+#         'HOST':'localhost',
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
