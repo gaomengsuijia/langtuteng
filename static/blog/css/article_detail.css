@@ -1,0 +1,38 @@
+.article_container{
+    background-color: white;
+}
+.article_header{
+        background: #fafafa;
+    color: #777;
+        border-bottom: 2px solid #ccc;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin-bottom: 10px;
+}
+.article_header .a_title{
+    color: #333;
+    overflow: hidden;
+}
+
+.article_footer{
+        padding: 6px 15px;
+    border-top-color: #eee;
+    background: #fafafa;
+        border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.article_footer .fa{
+        color: #e76f3c;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    animation-fill-mode: both;
+    animation-duration: 0.5s;
+    animation-name: bounceIn;
+}
+.fa-heart:before {
+    content: "\f004";
+}

@@ -1,12 +1,33 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 {% block title %}文章详情{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/article_detail.css' %}">
+{% endblock %}
 {% block body %}
-<div class="container">
+<div class="container article_container">
     <div class="row" >
         <div class="col-xs-6 col-sm-3 col-md-12">
+        <div class="article_header">
+            <h3 class="a_title">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</h3>
+            <div class="info">
+                <span>发表于:2018-10-15 15:15:60</span>
+                <span>阅读量：800</span>
+            </div>
+        </div>
+        <div>
             {% autoescape off %}
                 {{ article.body }}
             {% endautoescape %}
+        </div>
+        <div class="article_footer">
+            <div class="opts">
+                <a data-count="6" data-state="active" data-type="Topic" data-id="15323" class="likeable active tooltipstered" href="#">
+                    <i class="fa fa-heart"></i> <span>6 个赞</span>
+                </a>
+            </div>
+        </div>
+
         </div>
 
     </div>

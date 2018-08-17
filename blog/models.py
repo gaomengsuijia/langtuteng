@@ -39,3 +39,22 @@ class Article(models.Model):
     class Meta:
         verbose_name = "文章"
         verbose_name_plural = "文章"
+
+
+
+class Thumb(models.Model):
+    """
+    点赞
+    """
+    article = models.ForeignKey(Article,related_name='thumb_article',verbose_name="点赞的文章",on_delete=models.CASCADE)
+    person = models.ForeignKey(User,related_name='thumb_user',verbose_name="点赞人",on_delete=models.CASCADE)
+    thumb_time = models.DateTimeField(verbose_name="点赞时间",auto_now_add=True)
+
+    def __str__(self):
+        return 'article:{} person:{}'.format(self.article,self.person)
+
+
+    class Meta:
+        verbose_name="点赞"
+        verbose_name_plural = "点赞"
+

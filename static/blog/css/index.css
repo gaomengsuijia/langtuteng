@@ -78,3 +78,9 @@ body{
 .pagination a{
     color: #666;
 }
+.footer{
+        margin-top: 10px;
+    padding: 30px;
+    background-color: white;
+    color: #9CA4A9;
+}

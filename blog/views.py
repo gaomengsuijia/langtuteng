@@ -1,7 +1,14 @@
 from django.shortcuts import render
-from .models import Article,ArticleColumn
+from .models import Article,ArticleColumn,Thumb
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from langtuteng import settings
+import redis
 # Create your views here.
+#连接redis
+
+reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
+
+
 
 def index(request):
     """
@@ -38,4 +45,15 @@ def index(request):
 
 def article_detail(request,article_id):
     article = Article.objects.get(id=article_id)
-    return render(request,'blog/article_detail.html',{"article":article})
+    total_views = reds.incr('article:{}:views'.format(article_id))
+    return render(request,'blog/article_detail.html',{"article":article,"total_views":total_views})
+
+
+
+def thumb(request):
+    """
+    点赞
+    :param request:
+    :return:
+    """
+    pass

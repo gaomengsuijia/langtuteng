@@ -148,3 +148,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+#redis配置
+REDIS_HOST = '172.20.2.70'
+REDIS_PORT = 6379
+REDIS_DB = 2
