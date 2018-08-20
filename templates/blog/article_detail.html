@@ -22,17 +22,131 @@
         </div>
         <div class="article_footer">
             <div class="opts">
-                <a data-count="6" data-state="active" data-type="Topic" data-id="15323" class="likeable active tooltipstered" href="#">
-                    <i class="fa fa-heart"></i> <span>6 个赞</span>
+                <a data-count="6" data-state="active" data-type="Topic" data-id="15323" class="post_like likeable active tooltipstered"
+                   href="javascript:;" onclick="post_like('{{ article.id }}')">
+                    <i class="glyphicon glyphicon-thumbs-up"></i> <span><span class="thumb_total">{{ total_thumb }}</span> 个赞</span>
                 </a>
             </div>
         </div>
 
+
         </div>
 
     </div>
+        <div class="row article_comment">
+            <div class="col-xs-6 col-sm-3 col-md-12">
+                   <div id="replies" class="panel panel-default" data-last-floor="9">
+                      <div class="total panel-heading hide-ios">
+                        <span class="total-info">
+                        共收到 <b>7</b> 条回复
+                        </span>
 
+                      </div>
+
+                      <div class="items panel-body">
+                            <div class="reply" data-id="117734" id="reply1">
+                              <div id="reply-117734" data-floor="1" class="reply_item">
+                                  <div class="infos">
+                                    <div class="info">
+                                      <span class="name">
+                                        <a class="user-name" data-name="Meteorix" href="/Meteorix">Meteorix</a>
+                                      </span>
+                                      <span class="sub-info">
+                                        <a class="time" href="#reply-117734"><abbr class="timeago" title="" rel="twipsy" data-original-title="2018年08月13日">7 天前</abbr></a>
+                                      </span>
+
+                                      <span class="opts  pull-right">
+                                          <span class="hideable">
+                                              <a data-toggle="tooltip"  href="?order_by=created_at&amp;#replies"><i class="glyphicon glyphicon-remove"></i></a>
+                                         </span>
+                                      </span>
+                                    </div>
+
+                                    <div class="markdown">
+                                      <p>厉害厉害，有安装脚本或者使用文档上的问题，欢迎提Pull Request啊大哥</p>
+                                    </div>
+                                  </div>
+
+                              </div>
+                                <div id="reply-117734" data-floor="1" class="reply_item">
+                                  <div class="infos">
+                                    <div class="info">
+                                      <span class="name">
+                                        <a class="user-name" data-name="Meteorix" href="/Meteorix">Meteorix</a>
+                                      </span>
+                                      <span class="sub-info">
+                                        <a class="time" href="#reply-117734"><abbr class="timeago" title="" rel="twipsy" data-original-title="2018年08月13日">7 天前</abbr></a>
+                                      </span>
+
+                                      <span class="opts  pull-right">
+                                          <span class="hideable">
+                                              <a data-toggle="tooltip"  href="?order_by=created_at&amp;#replies"><i class="glyphicon glyphicon-remove"></i></a>
+                                         </span>
+                                      </span>
+                                    </div>
+
+                                    <div class="markdown">
+                                      <p>厉害厉害，有安装脚本或者使用文档上的问题，欢迎提Pull Request啊大哥</p>
+                                    </div>
+                                  </div>
+
+                              </div>
+                                <div id="reply-117734" data-floor="1" class="reply_item">
+                                  <div class="infos">
+                                    <div class="info">
+                                      <span class="name">
+                                        <a class="user-name" data-name="Meteorix" href="/Meteorix">Meteorix</a>
+                                      </span>
+                                      <span class="sub-info">
+                                        <a class="time" href="#reply-117734"><abbr class="timeago" title="" rel="twipsy" data-original-title="2018年08月13日">7 天前</abbr></a>
+                                      </span>
+
+                                      <span class="opts  pull-right">
+                                          <span class="hideable">
+                                              <a data-toggle="tooltip"  href="?order_by=created_at&amp;#replies"><i class="glyphicon glyphicon-remove"></i></a>
+                                         </span>
+                                      </span>
+                                    </div>
+
+                                    <div class="markdown">
+                                      <p>厉害厉害，有安装脚本或者使用文档上的问题，欢迎提Pull Request啊大哥</p>
+                                    </div>
+                                  </div>
+
+                              </div>
+                            </div>
+
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="row post_coment">
+            <div class="col-xs-6 col-sm-3 col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">回帖</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="comment_form">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ article.id }}" name = "articleid">
+                            <div class="form-group">
+                            <textarea class="topic-editor form-control" rows="4" tabindex="1" name="replybody" id="reply_body" style="height: 80px;"></textarea>
+                            </div>
+                            <div class="form-group">
+                            <input type="button" value="发表" class="pull-right button btn-primary">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
 </div>
 
 
+{% endblock %}
+{% block script %}
+    <script src="{% static 'blog/js/article_detail.js' %}"></script>
 {% endblock %}
