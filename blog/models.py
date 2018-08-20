@@ -58,3 +58,21 @@ class Thumb(models.Model):
         verbose_name="点赞"
         verbose_name_plural = "点赞"
 
+
+class Comment(models.Model):
+    """
+    评论
+    """
+    content = models.TextField(verbose_name="评论内容")
+    com_person = models.ForeignKey(User,verbose_name="评论人",related_name="per_comment",on_delete=models.CASCADE)
+    com_article = models.ForeignKey(Article,verbose_name="评论的文章",related_name="art_comment",on_delete=models.CASCADE)
+    create_time = models.DateTimeField(verbose_name="创建时间",auto_now_add=True)
+    is_del = models.CharField(verbose_name="删除标志",max_length=4,default=0)
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        verbose_name = '评论'
+        verbose_name_plural = '评论'
+

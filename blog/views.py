@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article,ArticleColumn,Thumb
+from .models import Article,ArticleColumn,Thumb,Comment
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from langtuteng import settings
 import redis
@@ -7,6 +7,7 @@ from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from .forms import CommentForm
 # Create your views here.
 #连接redis
 
@@ -78,3 +79,24 @@ def thumb(request):
             #查出总的点赞数
             total_thumb = Thumb.objects.filter(article_id=article_id).count()
             return JsonResponse({"code":20001,"total_thumb":total_thumb})
+
+@require_POST
+def comment(request):
+    """
+    评论
+    :param request:
+    :return:
+    """
+    if request.method == "POST":
+        article_id = request.POST['articleid']
+        comment = request.POST['replybody']
+        user = request.user
+        article = Article.objects.filter(id=article_id)
+        if comment == '':
+            return JsonResponse({"code":20003})#内容为空，不保存
+        if article:
+            new_comment = Comment(com_article_id=article_id,com_person_id=user.id,content=comment)
+            new_comment.save()
+            return JsonResponse({"code":20001})
+        else:
+            return JsonResponse({"code":20002})#文章不存在
