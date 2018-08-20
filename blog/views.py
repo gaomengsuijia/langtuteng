@@ -16,6 +16,7 @@ def index(request):
     :param request:
     :return:
     """
+    #查出阅读量前5的文章
     #查出所有的文章分类以及每个类目下的文章总数
     articlecolumn = ArticleColumn.objects.all()
     column_data = []
