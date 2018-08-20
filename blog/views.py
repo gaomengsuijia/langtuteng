@@ -3,6 +3,10 @@ from .models import Article,ArticleColumn,Thumb
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from langtuteng import settings
 import redis
+from django.http import HttpResponse,JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 #连接redis
 
@@ -46,14 +50,30 @@ def index(request):
 def article_detail(request,article_id):
     article = Article.objects.get(id=article_id)
     total_views = reds.incr('article:{}:views'.format(article_id))
-    return render(request,'blog/article_detail.html',{"article":article,"total_views":total_views})
+    total_thumb = article.thumb_article.all().count()
+    return render(request,'blog/article_detail.html',{"article":article,"total_views":total_views,
+                  "total_thumb":total_thumb})
 
 
-
+@csrf_exempt
+@require_POST
+@login_required(login_url="/account/login")
 def thumb(request):
     """
     点赞
     :param request:
     :return:
     """
-    pass
+    if request.method == "POST":
+        article_id = request.POST.get('article_id')
+        user = request.user
+        print(article_id,user)
+        old_thumb = Thumb.objects.filter(article_id=article_id,person_id=user.id)
+        if old_thumb:
+            return JsonResponse({"code":20002})#已经点赞
+        else:
+            new_thumb = Thumb(article_id=article_id,person_id=user.id)
+            new_thumb.save()
+            #查出总的点赞数
+            total_thumb = Thumb.objects.filter(article_id=article_id).count()
+            return JsonResponse({"code":20001,"total_thumb":total_thumb})

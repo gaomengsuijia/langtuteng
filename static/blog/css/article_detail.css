@@ -1,4 +1,4 @@
-.article_container{
+.article_container .row{
     background-color: white;
 }
 .article_header{
@@ -22,17 +22,13 @@
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
-.article_footer .fa{
-        color: #e76f3c;
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    animation-fill-mode: both;
-    animation-duration: 0.5s;
-    animation-name: bounceIn;
+.article_comment{
+    margin-top: 10px;
 }
-.fa-heart:before {
-    content: "\f004";
+
+.reply_item{
+    border-bottom: 1px solid #ddd;
+}
+#replies{
+    margin-top: 10px;
 }
