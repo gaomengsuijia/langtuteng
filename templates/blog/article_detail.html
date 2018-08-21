@@ -11,8 +11,8 @@
         <div class="article_header">
             <h3 class="a_title">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</h3>
             <div class="info">
-                <span>发表于:2018-10-15 15:15:60</span>
-                <span>阅读量：800</span>
+                <span>发表于:{{ article.create_time }}</span>
+                <span>阅读量：{{ total_views }}</span>
             </div>
         </div>
         <div>
@@ -38,21 +38,22 @@
                    <div id="replies" class="panel panel-default" data-last-floor="9">
                       <div class="total panel-heading hide-ios">
                         <span class="total-info">
-                        共收到 <b>7</b> 条回复
+                        共收到 <b>{{ all_comment.count }}</b> 条回复
                         </span>
 
                       </div>
 
                       <div class="items panel-body">
                             <div class="reply" data-id="117734" id="reply1">
-                              <div id="reply-117734" data-floor="1" class="reply_item">
+                                {% for each_comment in all_comment %}
+                                <div class="reply_item">
                                   <div class="infos">
                                     <div class="info">
                                       <span class="name">
-                                        <a class="user-name" data-name="Meteorix" href="/Meteorix">Meteorix</a>
+                                        <a class="user-name" data-name="Meteorix" href="/Meteorix">{{ each_comment.com_person }}</a>
                                       </span>
                                       <span class="sub-info">
-                                        <a class="time" href="#reply-117734"><abbr class="timeago" title="" rel="twipsy" data-original-title="2018年08月13日">7 天前</abbr></a>
+                                        <a class="time" href="#reply-117734"><abbr class="timeago" title="" rel="twipsy" data-original-title="2018年08月13日">{{ each_comment.create_time|date:"Y-m-d H:i:s" }}</abbr></a>
                                       </span>
 
                                       <span class="opts  pull-right">
@@ -63,57 +64,12 @@
                                     </div>
 
                                     <div class="markdown">
-                                      <p>厉害厉害，有安装脚本或者使用文档上的问题，欢迎提Pull Request啊大哥</p>
+                                      <p>{{ each_comment.content }}</p>
                                     </div>
                                   </div>
 
-                              </div>
-                                <div id="reply-117734" data-floor="1" class="reply_item">
-                                  <div class="infos">
-                                    <div class="info">
-                                      <span class="name">
-                                        <a class="user-name" data-name="Meteorix" href="/Meteorix">Meteorix</a>
-                                      </span>
-                                      <span class="sub-info">
-                                        <a class="time" href="#reply-117734"><abbr class="timeago" title="" rel="twipsy" data-original-title="2018年08月13日">7 天前</abbr></a>
-                                      </span>
-
-                                      <span class="opts  pull-right">
-                                          <span class="hideable">
-                                              <a data-toggle="tooltip"  href="?order_by=created_at&amp;#replies"><i class="glyphicon glyphicon-remove"></i></a>
-                                         </span>
-                                      </span>
-                                    </div>
-
-                                    <div class="markdown">
-                                      <p>厉害厉害，有安装脚本或者使用文档上的问题，欢迎提Pull Request啊大哥</p>
-                                    </div>
-                                  </div>
-
-                              </div>
-                                <div id="reply-117734" data-floor="1" class="reply_item">
-                                  <div class="infos">
-                                    <div class="info">
-                                      <span class="name">
-                                        <a class="user-name" data-name="Meteorix" href="/Meteorix">Meteorix</a>
-                                      </span>
-                                      <span class="sub-info">
-                                        <a class="time" href="#reply-117734"><abbr class="timeago" title="" rel="twipsy" data-original-title="2018年08月13日">7 天前</abbr></a>
-                                      </span>
-
-                                      <span class="opts  pull-right">
-                                          <span class="hideable">
-                                              <a data-toggle="tooltip"  href="?order_by=created_at&amp;#replies"><i class="glyphicon glyphicon-remove"></i></a>
-                                         </span>
-                                      </span>
-                                    </div>
-
-                                    <div class="markdown">
-                                      <p>厉害厉害，有安装脚本或者使用文档上的问题，欢迎提Pull Request啊大哥</p>
-                                    </div>
-                                  </div>
-
-                              </div>
+                                </div>
+                                {% endfor %}
                             </div>
 
                       </div>

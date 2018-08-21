@@ -15,6 +15,8 @@ function post_like(ar_id){
 
                     }else if (data['code']=="20002"){
                         layer.msg("请勿重复点赞")
+                    }else if (data['code']=="20004"){
+                        window.location.replace("/account/login")
                     }
 
                 },
@@ -25,7 +27,7 @@ function post_like(ar_id){
     })
 }
 
-
+//清除所有的空格
 function Trim(str,is_global)
   {
    var result;
@@ -37,10 +39,14 @@ function Trim(str,is_global)
    return result;
 }
 
+//检查字段
 function check_comment(comment) {
     var comm = Trim(comment,'g');
     if (comm == ""){
         layer.msg("请输入内容");
+        return false
+    }else if (comm.length>200) {
+        layer.msg("不能超过200个字符");
         return false
     }else {
         return true
@@ -48,9 +54,10 @@ function check_comment(comment) {
 }
 
 //动态添加评论
-function append_comment() {
+function append_comment(comment_html) {
     //清空testarea
     $("#reply_body").val("");
+    $("#reply1").append(comment_html);
 }
 
 //提交评论
@@ -71,10 +78,12 @@ function post_comment() {
                 success: function (data) {
                     if (data['code']=="20001"){
                         layer.msg("评论成功");
-                        append_comment();
+                        append_comment(data['comment_html']);
 
                     }else if (data['code']=="20002"){
                         layer.msg("请勿重复点赞")
+                    }else if(data['code']=="20004"){
+                        window.location.replace("/account/login");
                     }
 
                 },
