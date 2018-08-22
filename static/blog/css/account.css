@@ -2,34 +2,12 @@
 body{
     background-color: #d2d8de;
 }
-.regist_container{
-    display:table;
-    height:100%;
-    margin-top: 30px;
-    min-height: 900px;
-}
 
-.row{
-    display: table-cell;
-}
-/* centered columns styles */
-.row-centered {
-    text-align:center;
-}
-.col-centered {
-    display:inline-block;
-    float:none;
-    text-align:left;
-    margin-right:-4px;
-}
 .message{
     color: #b21f2d;
 }
 
 .login_container{
-    display:table;
-    height:100%;
-    margin-top: 100px;
-    margin-bottom: 65px;
+    margin-top: 30px;
     min-height: 900px;
 }

@@ -6,28 +6,34 @@
 {% endblock %}
 {% block body %}
         <div class="container login_container">
-            <div class="row row-centered">
-                <div class="well col-md-4 col-centered">
-                    <h2>欢迎登录</h2>
-                    <form action="{% url 'account:login' %}" method="post" role="form">
+                <div class="col-md-5 col-md-offset-2">
+                <div class="panel panel-default">
+                  <div class="panel-heading">登录</div>
+                  <div class="panel-body">
+                    <form class="simple_form " id="new_user" novalidate="novalidate" action="{% url 'account:login' %}" accept-charset="UTF-8" data-remote="true" method="post">
                         {% csrf_token %}
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="userid" name="username" placeholder="请输入用户名"/>
+                        <div class="form-group">
+                          <input type="text" class="form-control input-lg" id="userid" name="username" placeholder="请输入用户名">
                         </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"/>
+                        <div class="form-group">
+                          <input type="password" class="form-control input-lg" id="password" name="password" placeholder="请输入密码">
                         </div>
-                        <div class="input-group input-group-md">
-                            <span class="input-group-addon message" id="sizing-addon1">{{ message }}</span>
+
+                        <div class="from-group">
+                            <span class="message" id="sizing-addon1">{{ message }}</span>
                         </div>
-                        <br/>
-                                <button type="submit" class="btn btn-success btn-block">登录</button>
-                                <a href="{% url 'account:register' %}" class="pull-right">我要注册》》
+                        <div class="form-actions">
+                            <input type="submit" name="commit" value="登录" class="btn btn-primary btn-lg btn-block" data-disable-with="正在登录">
+                            <a href="{% url 'account:register' %}" class="pull-right">我要注册》》
                                 </a>
+                        </div>
                     </form>
+                  </div>
                 </div>
+              </div>
+
+
+
             </div>
         </div>
 
