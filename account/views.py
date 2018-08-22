@@ -66,7 +66,7 @@ def register(request):
             new_acount.save()
             return JsonResponse({"code":20001})
         else:
-            return render(request,'account/login.html')
+            return JsonResponse({"code":20004})
 
     else:
         registform = RegisterForm()

@@ -103,6 +103,8 @@ function res() {
 
                     }else if (data['code']==20002){
                         layer.msg("注册失败，该用户名已被占用")
+                    }else if (data['code']==20004){
+                        layer.msg("参数不合法");
                     }
 
                 },

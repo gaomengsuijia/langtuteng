@@ -25,7 +25,7 @@ SECRET_KEY = '1h3fwn4)x2tlkrwe@9s!4!$2q#_h(&_o3sgen@dxky)r@p5off'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,15 +85,15 @@ WSGI_APPLICATION = 'langtuteng.wsgi.application'
 # }
 
 #mysql,本地环境
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'USER':'root',
-        'PASSWORD':'hu2006615',
-        'NAME':'langtuteng',
-        'HOST':'localhost',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'USER':'root',
+#         'PASSWORD':'hu2006615',
+#         'NAME':'langtuteng',
+#         'HOST':'localhost',
+#     }
+# }
 #mysql,家里环境
 # DATABASES = {
 #     'default': {
@@ -106,6 +106,16 @@ DATABASES = {
 # }
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
+#正式环境
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'USER':'root',
+        'PASSWORD':'hu2006615',
+        'NAME':'langtuteng',
+        'HOST':'localhost',
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -143,19 +153,25 @@ USE_TZ = False
 STATIC_URL = '/static/'
 #文件上传配置
 MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
-
+#用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 #指定静态文件夹所在的路径
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
 #家里的redis配置
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-REDIS_DB = 2
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = 6379
+# REDIS_DB = 2
 
 
 #公司
 REDIS_HOST = '172.20.2.70'
 REDIS_PORT = 6379
 REDIS_DB = 2
+
+#线上
+# REDIS_HOST = '118.24.63.93'
+# REDIS_PORT = 6379
+# REDIS_DB = 2

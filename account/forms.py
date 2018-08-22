@@ -45,10 +45,19 @@ class RegisterForm(forms.ModelForm):
         username = cleaned_data['username']
         email = cleaned_data['email']
         password = cleaned_data['password']
-        if(re.findall(username_re,username) and re.findall(email_re,email) and re.findall(password_re,password)):
-            return cleaned_data
+        if email:
+            if (re.findall(username_re, username) and re.findall(email_re, email) and re.findall(password_re,password)):
+                return cleaned_data
+            else:
+                raise ValidationError("user 参数不符合格式")
+
         else:
-            raise ValidationError("user 参数不符合格式")
+            if (re.findall(username_re, username) and re.findall(password_re,password)):
+                return cleaned_data
+            else:
+                raise ValidationError("user 参数不符合格式")
+
+
 
 
 
@@ -69,7 +78,13 @@ class AcountForm(forms.ModelForm):
         phone_re = re.compile(r'^[1][3,4,5,7,8][0-9]{9}$')
         nickname = cleaned_data['nickname']
         phone = cleaned_data['phone']
-        if (re.findall(nickname_re,nickname) and re.findall(phone_re,phone)):
-            return cleaned_data
+        if phone:
+            if (re.findall(nickname_re,nickname) and re.findall(phone_re,phone)):
+                return cleaned_data
+            else:
+                raise ValidationError("account 字段格式不对")
         else:
-            raise ValidationError("account 字段格式不对")
+            if re.findall(nickname_re,nickname):
+                return cleaned_data
+            else:
+                raise ValidationError("account 字段格式不对")

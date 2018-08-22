@@ -8,7 +8,7 @@ class Account(models.Model):
     """
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     nickname = models.CharField(max_length=20,verbose_name="昵称")
-    phone = models.CharField(max_length=12,verbose_name="手机号码")
+    phone = models.CharField(max_length=12,verbose_name="手机号码",blank=True)
 
     class Meta:
         verbose_name = "注册用户"

@@ -10,9 +10,9 @@ from django.core.paginator import Paginator
 # Create your views here.
 #连接redis
 
+# reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB,password='Xiaotu123456')
+
 reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
-
-
 
 def index(request):
     """
