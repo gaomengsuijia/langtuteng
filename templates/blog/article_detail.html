@@ -9,7 +9,7 @@
     <div class="row" >
         <div class="col-xs-6 col-sm-3 col-md-12">
         <div class="article_header">
-            <h3 class="a_title">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</h3>
+            <h3 class="a_title">{{ article.title }}</h3>
             <div class="info">
                 <span>发表于:{{ article.create_time }}</span>
                 <span>阅读量：{{ total_views }}</span>
@@ -58,7 +58,9 @@
 
                                       <span class="opts  pull-right">
                                           <span class="hideable">
-                                              <a data-toggle="tooltip"  href="?order_by=created_at&amp;#replies"><i class="glyphicon glyphicon-remove"></i></a>
+                                              <a data-toggle="tooltip"  href="?order_by=created_at&amp;#replies">
+{#                                                  <i class="glyphicon glyphicon-remove"></i>#}
+                                              </a>
                                          </span>
                                       </span>
                                     </div>

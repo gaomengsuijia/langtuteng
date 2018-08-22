@@ -79,8 +79,12 @@ body{
     color: #666;
 }
 .footer{
-    margin-top: 400px;
+    position: relative;
     padding: 30px;
     background-color: white;
     color: #9CA4A9;
+    bottom: 0px;
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: 10px;
 }

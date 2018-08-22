@@ -85,15 +85,15 @@ WSGI_APPLICATION = 'langtuteng.wsgi.application'
 # }
 
 #mysql,本地环境
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'USER':'root',
-#         'PASSWORD':'hu2006615',
-#         'NAME':'langtuteng',
-#         'HOST':'localhost',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'USER':'root',
+        'PASSWORD':'hu2006615',
+        'NAME':'langtuteng',
+        'HOST':'localhost',
+    }
+}
 #mysql,家里环境
 # DATABASES = {
 #     'default': {
@@ -106,16 +106,6 @@ WSGI_APPLICATION = 'langtuteng.wsgi.application'
 # }
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
-#正式环境
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'USER':'root',
-        'PASSWORD':'hu2006615',
-        'NAME':'langtuteng',
-        'HOST':'localhost',
-    }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -170,8 +160,3 @@ STATICFILES_DIRS = [
 REDIS_HOST = '172.20.2.70'
 REDIS_PORT = 6379
 REDIS_DB = 2
-
-#线上
-# REDIS_HOST = '118.24.63.93'
-# REDIS_PORT = 6379
-# REDIS_DB = 2
