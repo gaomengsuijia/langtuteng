@@ -7,34 +7,34 @@
 {% block body %}
 <div class="container article_container">
     <div class="row" >
-        <div class="col-xs-6 col-sm-3 col-md-12">
-        <div class="article_header">
-            <h3 class="a_title">{{ article.title }}</h3>
-            <div class="info">
-                <span>发表于:{{ article.create_time }}</span>
-                <span>阅读量：{{ total_views }}</span>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="article_header">
+                <h3 class="a_title">{{ article.title }}</h3>
+                <div class="info">
+                    <span>发表于:{{ article.create_time }}</span>
+                    <span>阅读量：{{ total_views }}</span>
+                </div>
             </div>
-        </div>
-        <div>
-            {% autoescape off %}
-                {{ article.body }}
-            {% endautoescape %}
-        </div>
-        <div class="article_footer">
-            <div class="opts">
-                <a data-count="6" data-state="active" data-type="Topic" data-id="15323" class="post_like likeable active tooltipstered"
-                   href="javascript:;" onclick="post_like('{{ article.id }}')">
-                    <i class="glyphicon glyphicon-thumbs-up"></i> <span><span class="thumb_total">{{ total_thumb }}</span> 个赞</span>
-                </a>
+            <div>
+                {% autoescape off %}
+                    {{ article.body }}
+                {% endautoescape %}
             </div>
-        </div>
+            <div class="article_footer">
+                <div class="opts">
+                    <a data-count="6" data-state="active" data-type="Topic" data-id="15323" class="post_like likeable active tooltipstered"
+                       href="javascript:;" onclick="post_like('{{ article.id }}')">
+                        <i class="glyphicon glyphicon-thumbs-up"></i> <span><span class="thumb_total">{{ total_thumb }}</span> 个赞</span>
+                    </a>
+                </div>
+            </div>
 
 
-        </div>
+            </div>
 
     </div>
         <div class="row article_comment">
-            <div class="col-xs-6 col-sm-3 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                    <div id="replies" class="panel panel-default" data-last-floor="9">
                       <div class="total panel-heading hide-ios">
                         <span class="total-info">
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="row post_coment">
-            <div class="col-xs-6 col-sm-3 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">回帖</h3>

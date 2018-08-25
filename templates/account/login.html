@@ -6,11 +6,11 @@
 {% endblock %}
 {% block body %}
         <div class="container login_container">
-                <div class="col-md-5 col-md-offset-2">
+                <div class="col-md-5 col-md-offset-3">
                 <div class="panel panel-default">
                   <div class="panel-heading">登录</div>
                   <div class="panel-body">
-                    <form class="simple_form " id="new_user" novalidate="novalidate" action="{% url 'account:login' %}" accept-charset="UTF-8" data-remote="true" method="post">
+                    <form class="simple_form " id="new_user" novalidate="novalidate" action="{% url 'account:login' %}" accept-charset="UTF-8" data-remote="true" method="post" role="form">
                         {% csrf_token %}
                         <div class="form-group">
                           <input type="text" class="form-control input-lg" id="userid" name="username" placeholder="请输入用户名">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-actions">
                             <input type="submit" name="commit" value="登录" class="btn btn-primary btn-lg btn-block" data-disable-with="正在登录">
-                            <a href="{% url 'account:register' %}" class="pull-right">我要注册》》
+                            <a href="{% url 'account:register' %}" class="pull-right"><small>我要注册》》</small>
                                 </a>
                         </div>
                     </form>

@@ -16,6 +16,7 @@
                 <li><a href="#">生活随笔</a></li>
 
             </ul>
+
             <div class="nav-login">
                 <ul class="list-inline">
                     {% if user.is_authenticated %}
@@ -28,6 +29,21 @@
                 </ul>
 
             </div>
+            <ul class="pull-right search-nav">
+                <li class="hidden-xs hidden-md hidden-sm">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="搜索本站内容">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="button btn-default btn-sm">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </div>
+                </form>
+                </li>
+            </ul>
+
         </div>
 
     </div>

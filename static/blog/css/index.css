@@ -1,6 +1,9 @@
 body{
     background-color: #d2d8de;
 }
+.navbar-default{
+    border:0px;
+}
 #header_nav{
     background-color: #103858;
 }
@@ -16,6 +19,10 @@ body{
 }
 #header_nav .container-fluid .ac a{
     color:#fff;
+}
+.search-nav{
+    margin-top: 8px;
+    margin-right: 10px;
 }
 .nav-login{
     float: right;
@@ -47,6 +54,7 @@ body{
     min-height: 10px;
     _height: 10px;
 }
+
 .list-group-item a.article_title{
     font-weight: bold;
 }
