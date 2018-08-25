@@ -6,7 +6,7 @@ class Account(models.Model):
     """
     用户
     """
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="account_user")
     nickname = models.CharField(max_length=20,verbose_name="昵称")
     phone = models.CharField(max_length=12,verbose_name="手机号码",blank=True)
 

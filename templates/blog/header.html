@@ -20,7 +20,7 @@
             <div class="nav-login">
                 <ul class="list-inline">
                     {% if user.is_authenticated %}
-                        <li><a href="#" class="login" target="_blank">{{ user.username }}</a></li>
+                        <li><a href="#" class="login" target="_blank">{{ user.account_user.nickname }}</a></li>
                         <li><a href="{% url 'account:logout' %}" class="register" target="_blank">退出</a></li>
                         {% else %}
                         <li><a href="{% url 'account:login' %}" class="login" target="_blank">登录</a></li>
