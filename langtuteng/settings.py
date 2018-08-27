@@ -142,6 +142,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 #文件上传配置
+MEDIA_URL = "/uploads/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
 #用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
