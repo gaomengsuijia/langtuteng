@@ -6,8 +6,8 @@ import redis
 from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.core.paginator import Paginator
-
+from django.db.models import Q
+from django.urls import reverse
 # Create your views here.
 #连接redis
 
@@ -147,3 +147,39 @@ def comment(request):
                 return JsonResponse({"code":20002})#文章不存在
         else:
             return JsonResponse({"code":20004})
+
+
+
+
+def article_search(request):
+    """
+    文章搜索
+    :param request:
+    :return:
+    """
+    if request.method == "GET":
+        keyword = request.GET.get('keyword','')
+        if keyword:
+            queryset = Article.objects.filter(Q(title__icontains=keyword) | Q(summary__icontains=keyword),delflag=0)
+            paginator = Paginator(queryset,10)
+            page = request.GET.get('page',1)
+
+            try:
+                current_page = paginator.page(page)
+                contacts = current_page.object_list
+            except PageNotAnInteger:
+                current_page = paginator.page(1)
+                contacts = current_page.object_list
+            except EmptyPage:
+                current_page = paginator.page(1)
+                contacts = current_page.object_list
+
+            return render(request,'blog/search.html',{'contacts':contacts,'page':current_page,'keyword':keyword})
+        else:
+            return HttpResponseRedirect(reverse('blog:index'))
+
+    else:
+        return HttpResponseRedirect(reverse('blog:index'))
+
+
+

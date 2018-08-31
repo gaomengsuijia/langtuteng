@@ -1,0 +1,51 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}搜索页面{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/account.css' %}">
+{% endblock %}
+{% block body %}
+<div class="container search_container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p class="search_info">关于 “<span>{{ keyword }}</span>” 的搜索结果, 共 <span>{{ contacts.count }}</span> 条</p>
+                </div>
+                <div class="panel-body">
+                    {% for article in contacts %}
+                        <div class="result">
+                            <div class="result-title"><a href="{% url 'blog:article' article.id %}">{{ article.title }}</a></div>
+                            <div class="result-info"><a href="{% url 'blog:article' article.id %}">http://{{ request.META.HTTP_HOST }}{% url 'blog:article' article.id %} </a><span>{{ article.create_time }}</span></div>
+                            <div class="result-summary">
+                                <p>{{ article.summary | slice:'70' }}</p>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div style="text-align: center;color: #c3c3c3"> 没有搜索到任何有关 “<span>{{ keyword }}</span>” 的内容</div>
+                    {% endfor %}
+
+                    <!--分页开始-->
+                    <div class="pagination" style="float: right">
+                        <ul class="pager">
+                        {% if page.has_previous %}
+                            <li><a href="?page={{ page.previous_page_number }}">上一页</a></li>
+                        {% endif %}
+                        {% if page.has_next %}
+                            <li><a href="?page={{ page.next_page_number }}">下一页</a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--分页结束-->
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+{% endblock %}

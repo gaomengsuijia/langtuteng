@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'account',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
+
+#restframwork
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
 
 
 # Static files (CSS, JavaScript, Images)
