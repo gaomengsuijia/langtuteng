@@ -1,0 +1,46 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}个人主页{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/account.css' %}">
+{% endblock %}
+{% block body %}
+        <div class="container myself_container">
+               <div class="row">
+                   <div class="col-md-2">
+                       <div class="panel panel-default setting-munu">
+                           <ul class="list-unstyled">
+                               <li class="active"><a href="{% url 'account:myself' %}"><span class="glyphicon glyphicon-user"></span>基本信息</a></li>
+                               <li><a href="{% url 'account:userinfo' %}"><span class="glyphicon glyphicon-th"></span>详细信息</a> </li>
+                               <li><a href="{% url 'account:modifypassword' %}"><span class="glyphicon glyphicon-th"></span>修改密码</a> </li>
+                           </ul>
+                       </div>
+                   </div>
+                   <div class="col-md-10">
+                       <div class="panel panel-default">
+                           <div class="panel-body">
+                           <form role="form" action="{% url 'account:myself' %}" method="post">{% csrf_token %}
+                               <div class="form-group">
+                                   {{ accountform.nickname.errors }}
+                                <label for="name">*昵称</label>
+                                <input type="text" class="form-control" id="nickname" name="nickname"  value="{{ account.nickname }}">
+                              </div>
+                              <div class="form-group">
+                                  {{ userform.email.errors }}
+                                <label for="email">邮件</label>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="请输入邮件" value="{{ users.email }}">
+                              </div>
+                              <div class="form-group">
+                                  {{ accountform.phone.errors }}
+                                <label for="phone">电话号码</label>
+                                <input type="text" id="phone" name="phone" class="form-control" placeholder="请输入电话号码" value="{{ account.phone }}">
+                              </div>
+                              <button type="submit" class="btn btn-default">更新资料</button>
+                           </form>
+                       </div>
+                       </div>
+                   </div>
+               </div>
+        </div>
+
+{% endblock %}

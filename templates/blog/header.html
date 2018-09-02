@@ -18,17 +18,29 @@
             </ul>
 
             <div class="nav-login">
-                <ul class="list-inline">
-                    {% if user.is_authenticated %}
-                        <li><a href="#" class="login" target="_blank">{{ user.account_user.nickname }}</a></li>
-                        <li><a href="{% url 'account:logout' %}" class="register" target="_blank">退出</a></li>
-                        {% else %}
-                        <li><a href="{% url 'account:login' %}" class="login" target="_blank">登录</a></li>
-                        <li><a href="{% url 'account:register' %}" class="register" target="_blank">无账号？注册</a></li>
-                    {% endif %}
-                </ul>
+            {% if user.is_authenticated %}
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                        {{ user.account_user.nickname }}<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="{% url 'account:myself' %}">我的主页</a>
+                        </li>
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="{% url 'account:logout' %}" class="register" target="_blank">退出</a>
+                        </li>
 
+                    </ul>
+                </div>
+                {% else %}
+                <ul class="list-inline">
+                    <li><a href="{% url 'account:login' %}" class="login" target="_blank">登录</a></li>
+                    <li><a href="{% url 'account:register' %}" class="register" target="_blank">无账号？</a></li>
+                </ul>
+            {% endif %}
             </div>
+
             <ul class="pull-right search-nav">
                 <li class="hidden-xs hidden-md hidden-sm">
                     <form class="form-inline" method="get" action="{% url 'blog:search' %}" id="searchform">

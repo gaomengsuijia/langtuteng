@@ -149,8 +149,6 @@ def comment(request):
             return JsonResponse({"code":20004})
 
 
-
-
 def article_search(request):
     """
     文章搜索

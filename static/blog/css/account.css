@@ -19,3 +19,45 @@ body{
     height: 20px;
     margin: 0px;
 }
+.myself_container{
+    min-height: 900px;
+    margin-top: 30px;
+}
+.myself_container .setting-munu ul li{
+    border-bottom: 1px solid #B6B6B6;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 0px;
+}
+.myself_container .setting-munu ul li:hover{
+    cursor: pointer;
+}
+.myself_container .setting-munu ul li.active a{
+    color: #356DD0;
+}
+.myself_container .setting-munu ul li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #666;
+}
+.myself_container .setting-munu ul li a span{
+    margin: auto 10px;
+}
+.myself_container .setting-munu ul li a:hover{
+    text-decoration: none;
+}
+.phone{
+    margin-left: 40px;
+}
+.phone img{
+    width: 400px;
+    height: auto;
+}
+.phone .btn-changephone{
+    margin-top: 10px;
+}
+ul.errorlist{
+    list-style: none;
+    color: red;
+}

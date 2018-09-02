@@ -27,9 +27,11 @@ body{
 .nav-login{
     float: right;
     height: 50px;
+    text-align: center;
+    line-height: 50px;
+    width: 150px;
 }
 .list-inline{
-    margin-top: 10px;
     font-size: 14px;
 }
 .list-inline .login{

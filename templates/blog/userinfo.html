@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}个人主页{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/account.css' %}">
+{% endblock %}
+{% block body %}
+        <div class="container myself_container">
+               <div class="row">
+                   <div class="col-md-2">
+                       <div class="panel panel-default setting-munu">
+                           <ul class="list-unstyled">
+                               <li ><a href="{% url 'account:myself' %}"><span class="glyphicon glyphicon-user"></span>基本信息</a></li>
+                               <li class="active"><a href="{% url 'account:userinfo' %}"><span class="glyphicon glyphicon-th"></span>详细信息</a> </li>
+                               <li><a href="{% url 'account:modifypassword' %}"><span class="glyphicon glyphicon-th"></span>修改密码</a> </li>
+                           </ul>
+                       </div>
+                   </div>
+                   <div class="col-md-10">
+                       <div class="panel panel-default">
+                           <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <form role="form" method="post" action="{% url 'account:userinfo' %}">{% csrf_token %}
+                                           <div class="form-group">
+                                               {{ userinfoform.address.errors }}
+                                            <label for="address">地址</label>
+                                            <input type="text" class="form-control" id="address" placeholder="请输入地址" name="address" value="{{ userinfo.address }}">
+                                          </div>
+                                          <div class="form-group">
+                                              {{ userinfoform.company.errors }}
+                                            <label for="company">公司</label>
+                                            <input type="text" id="company" name="company" class="form-control" placeholder="请输入公司名称" value="{{ userinfo.company }}">
+                                          </div>
+                                          <div class="form-group">
+                                              {{ userinfoform.profession.errors }}
+                                            <label for="profession">职业</label>
+                                            <input type="text" id="profession" name="profession" class="form-control" placeholder="请输入职业" value="{{ userinfo.profession }}">
+                                          </div>
+                                           <div class="form-group">
+                                               {{ userinfoform.aboutme.errors }}
+                                               <label for="aboutme">个人简介</label>
+                                               <textarea id="aboutme" name="aboutme" class="form-control" placeholder="请输入个人简介">{{ userinfo.aboutme }}</textarea>
+                                           </div>
+                                          <button type="submit" class="btn btn-default">更新资料</button>
+                                       </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="phone">
+                                            {% if userinfo.photo %}
+                                                <img src="{{ userinfo.photo | striptags }}" class="img-responsive">
+                                            {% else %}
+                                                <img src="{% static  'blog/images/newton.jpg' %}" class="img-responsive">
+                                            {% endif %}
+                                            <button type="button" class="btn-changephone" onclick="upload_phone()">更换头像</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                       </div>
+                   </div>
+               </div>
+        </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'blog/js/myself.js' %}"></script>
+{% endblock %}
