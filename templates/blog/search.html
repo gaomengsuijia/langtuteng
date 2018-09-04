@@ -16,13 +16,13 @@
                     {% for article in contacts %}
                         <div class="result">
                             <div class="result-title"><a href="{% url 'blog:article' article.id %}">{{ article.title }}</a></div>
-                            <div class="result-info"><a href="{% url 'blog:article' article.id %}">http://{{ request.META.HTTP_HOST }}{% url 'blog:article' article.id %} </a><span>{{ article.create_time }}</span></div>
+                            <div class="result-info"><a href="{% url 'blog:article' article.id %}" class="search-article-href">http://{{ request.META.HTTP_HOST }}{% url 'blog:article' article.id %} </a><span class="search-article-time">{{ article.create_time }}</span></div>
                             <div class="result-summary">
                                 <p>{{ article.summary | slice:'70' }}</p>
                             </div>
                         </div>
                         {% empty %}
-                        <div style="text-align: center;color: #c3c3c3"> 没有搜索到任何有关 “<span>{{ keyword }}</span>” 的内容</div>
+                        <div class="search-no-article"> 没有搜索到任何有关 “<span>{{ keyword }}</span>” 的内容</div>
                     {% endfor %}
 
                     <!--分页开始-->
