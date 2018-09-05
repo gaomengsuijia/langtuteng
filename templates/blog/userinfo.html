@@ -48,7 +48,7 @@
                                     <div class="col-md-4">
                                         <div class="phone">
                                             {% if userinfo.photo %}
-                                                <img src="{{ userinfo.photo | striptags }}" class="img-responsive">
+                                                <img src="{{ userinfo.photo }}" class="img-responsive">
                                             {% else %}
                                                 <img src="{% static  'blog/images/newton.jpg' %}" class="img-responsive">
                                             {% endif %}

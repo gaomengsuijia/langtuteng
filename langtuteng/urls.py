@@ -18,6 +18,7 @@ from django.urls import path,include,re_path
 from django.views.static import serve
 from django.conf import settings
 from blog.uploads import upload_image
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
@@ -26,3 +27,5 @@ urlpatterns = [
     re_path('^admin/upload/(?P<dir_name>[^/]+)$', upload_image, name='upload_image')
 
 ]
+
+urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

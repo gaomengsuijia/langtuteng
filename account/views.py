@@ -175,14 +175,14 @@ def my_image(request):
             print(img)
             img = img.split(',')[1]
             #将base64的图片解码，保存到硬盘
-            img_name = 'userphone\\' + request.user.username + '.png'
+            img_name = 'userphone\\' + request.user.username + str(random.randint(1,100)) + '.png'
             img_path = os.path.join(settings.MEDIA_ROOT,img_name)
             print(img_path)
             with open(img_path, 'wb') as f:
                 baseimg = base64.b64decode(img)
                 f.write(baseimg)
             new_userinfo = Userinfo.objects.get(user=request.user)
-            new_userinfo.photo = img_name
+            new_userinfo.photo = settings.MEDIA_URL + img_name
             new_userinfo.save()
             return HttpResponse('1')
         else:
