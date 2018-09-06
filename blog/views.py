@@ -11,9 +11,11 @@ from django.urls import reverse
 # Create your views here.
 #连接redis
 
-# reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB,password='Xiaotu123456')
-
-reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
+if settings.REDIS_PASSWORD:
+    reds = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB,
+                       password=settings.REDIS_PASSWORD)
+else:
+    reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
 
 def index(request):
     """
@@ -38,7 +40,8 @@ def index(request):
     page = request.GET.get('page', 1)
     #查出阅读排行top5的文章
     # 钱5
-    top_rank_ar = reds.zrange('article_ranking', 0, -1, desc=True)[0:5]
+    all_rank = reds.zrange('article_ranking', 0, -1, desc=True)
+    top_rank_ar = all_rank[0:5] if len(all_rank)>=5 else all_rank
     top_rank_ar_id = [int(i) for i in top_rank_ar]
     top_rank = list(Article.objects.filter(id__in=top_rank_ar_id))
     top_rank.sort(key=lambda x: top_rank_ar_id.index(x.id))
