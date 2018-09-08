@@ -1,0 +1,26 @@
+<div class="right-info">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">阅读排行榜</h3>
+                    </div>
+                    <ul class="list-group article_cataty">
+                        {% for each_rank in top_rank %}
+                        <li class="list-group-item">
+                            <i class="glyphicon glyphicon-hand-right"></i> <a href="{% url 'blog:article' each_rank.id %}">{{ each_rank.title | slice:'15' }}...</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                 <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">文章分类</h3>
+                    </div>
+                    <ul class="list-group article_cataty">
+                        {% for each_data in column_data %}
+                        <li class="list-group-item">
+                            <a href="{% url 'blog:columnlist' each_data.id %}">{{ each_data.name }}<span>({{ each_data.num }})</span></a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+</div>

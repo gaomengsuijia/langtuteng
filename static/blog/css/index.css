@@ -1,6 +1,9 @@
 body{
     background-color: #d2d8de;
 }
+.index-container{
+    min-height: 900px;
+}
 .navbar-default{
     border:0px;
 }

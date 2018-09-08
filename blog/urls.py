@@ -15,5 +15,6 @@ urlpatterns = [
     path('thumb', views.thumb, name='thumb'),
     path('comment', views.comment, name='comment'),
     path('api/',include(router.urls)),
-    path('search',views.article_search,name='search')
+    path('search',views.article_search,name='search'),
+    path('columnlist/<int:column_id>',views.columnlist,name='columnlist')
 ]

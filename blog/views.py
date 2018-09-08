@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,render_to_response
 from .models import Article,ArticleColumn,Thumb,Comment
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from langtuteng import settings
@@ -12,10 +12,33 @@ from django.urls import reverse
 #连接redis
 
 if settings.REDIS_PASSWORD:
-    reds = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB,
-                       password=settings.REDIS_PASSWORD)
+    try:
+        reds = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB,
+                           password=settings.REDIS_PASSWORD)
+    except ConnectionError as e:
+        raise ConnectionError("redis 连接失败")
 else:
-    reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
+    try:
+        reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
+    except ConnectionError as e:
+        raise ConnectionError("redis 连接失败")
+
+
+def page_not_found(request):
+    """
+    404错误
+    :param request:
+    :return:
+    """
+    return render_to_response('blog/404.html')
+
+def page_error(request):
+    """
+    500错误
+    :param request:
+    :return:
+    """
+    return render_to_response('blog/500.html')
 
 def index(request):
     """
@@ -181,6 +204,55 @@ def article_search(request):
 
     else:
         return HttpResponseRedirect(reverse('blog:index'))
+
+
+
+def columnlist(request,column_id):
+    """
+    分类列表页面
+    :param request:
+    :return:
+    """
+    # 查出阅读量前5的文章
+    # 查出所有的文章分类以及每个类目下的文章总数
+    if column_id:
+        current_columm = ArticleColumn.objects.filter(id=column_id)
+        if not current_columm:
+            return HttpResponseRedirect(reverse('blog:index'))
+        else:
+            articlecolumn = ArticleColumn.objects.all()
+            column_data = []
+            for each in articlecolumn:
+                dic = {
+                    'id': each.id,
+                    'name': each.column,
+                    'num': len(each.articles.filter(delflag=0))
+                }
+                column_data.append(dic)
+            # 查出没有删除的文章列表
+            articles = Article.objects.filter(delflag=0,column=column_id).order_by('-create_time')
+            paginator = Paginator(articles, 10)
+            page = request.GET.get('page', 1)
+            # 查出阅读排行top5的文章
+            # 钱5
+            all_rank = reds.zrange('article_ranking', 0, -1, desc=True)
+            top_rank_ar = all_rank[0:5] if len(all_rank) >= 5 else all_rank
+            top_rank_ar_id = [int(i) for i in top_rank_ar]
+            top_rank = list(Article.objects.filter(id__in=top_rank_ar_id))
+            top_rank.sort(key=lambda x: top_rank_ar_id.index(x.id))
+
+            try:
+                current_page = paginator.page(page)
+                contacts = current_page.object_list
+            except PageNotAnInteger:
+                current_page = paginator.page(1)
+                contacts = current_page.object_list
+            except EmptyPage:
+                current_page = paginator.page(1)
+                contacts = current_page.object_list
+
+            return render(request, 'blog/column_list.html', {'contacts': contacts, 'page': current_page, 'column_data': column_data,
+                                                       'top_rank': top_rank,"current_columm":current_columm[0].column})
 
 
 

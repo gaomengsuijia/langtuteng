@@ -158,13 +158,13 @@ STATICFILES_DIRS = [
 ]
 
 #家里的redis配置
-# REDIS_HOST = 'localhost'
-# REDIS_PORT = 6379
-# REDIS_DB = 2
-
-
-#公司
-REDIS_HOST = '172.20.2.70'
+REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 2
 REDIS_PASSWORD = ''
+
+#公司
+# REDIS_HOST = '172.20.2.70'
+# REDIS_PORT = 6379
+# REDIS_DB = 2
+# REDIS_PASSWORD = ''

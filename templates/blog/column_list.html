@@ -1,11 +1,17 @@
 {% extends 'blog/base.html' %}
 {% load static %}
-{% block title %}狼图腾博客{% endblock %}
+{% block title %}分类页面{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/colummlist.css' %}">
+{% endblock %}
 {% block body %}
-<div class="container index-container">
-    <div class="row">
-        <div class="col-md-9">
-            <ul class="list-group">
+<div class="container columm_container">
+<div class="row">
+    <div class="col-md-9">
+        <div class="colummtitle">
+            <p><span class="colum-ti">{{ current_columm }}</span></p>
+        </div>
+        <ul class="list-group">
                 {% for article in contacts %}
             <li class="list-group-item">
                 <div>
@@ -22,6 +28,9 @@
                     <div style="clear: both"></div>
                 </div>
             </li>
+                    {% empty %}
+                    <div class="search-no-article"> 没有任何有关 “<span>{{ current_columm }}</span>” 的文章</div>
+                    <p></p>
                 {% endfor %}
             </ul>
 
@@ -38,12 +47,16 @@
             </div>
             <div class="clearfix"></div>
             <!--分页结束-->
-        </div>
-        <div class="col-md-3">
-            {% include 'blog/rightinfo.html' %}
-        </div>
+
 
     </div>
+    <div class="col-md-3">
+        {% include 'blog/rightinfo.html' %}
+    </div>
+</div>
 
 </div>
+
+
+
 {% endblock %}
