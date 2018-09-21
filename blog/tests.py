@@ -1,6 +1,9 @@
 from django.test import TestCase
 
 # Create your tests here.
-a = [1,2,3,4]
-b = a + [6]
-print(b)
+import uuid
+
+
+for i in range(20):
+    myid = uuid.uuid4()
+    print(myid)
