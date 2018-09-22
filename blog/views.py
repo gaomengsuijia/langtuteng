@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db.models import Q
 from django.urls import reverse
+import requests
+import json
 # Create your views here.
 #连接redis
 
@@ -256,3 +258,26 @@ def columnlist(request,column_id):
 
 
 
+def suibi(request):
+    """
+    随笔
+    :param request:
+    :return:
+    """
+    return render(request,'blog/suibi.html')
+
+
+
+def movie(request):
+    """
+    获取猫扑上的电影票房
+    :param request:
+    :return:
+    """
+    data = {}
+    try:
+        res = requests.get(url="https://box.maoyan.com/promovie/api/box/second.json").text
+        data = json.loads(res)
+    except Exception as e:
+        print("数据获取失败")
+    return render(request, 'blog/movie.html', {"data": data})

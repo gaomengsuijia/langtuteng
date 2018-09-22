@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load blog_extras %}
+{% block title %}生活随笔{% endblock %}
+{% block body %}
+
+    <div class="container">
+
+    <p>我是随笔</p>
+        {% active_tag %}
+    </div>
+
+
+{% endblock %}

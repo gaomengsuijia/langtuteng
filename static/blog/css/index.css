@@ -111,3 +111,6 @@ body{
 #lishiif{
     margin-top: 5px;
 }
+#movie_cont{
+    min-height: 900px;
+}

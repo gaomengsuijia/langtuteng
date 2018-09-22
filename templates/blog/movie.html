@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load blog_extras %}
+{% block title %}电影{% endblock %}
+
+{% block body %}
+    <div class="container" id="movie_cont">
+        <h3>北京时间：{% now_data %} {{ data.data.updateInfo|format_time }}</h3>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>影片</th>
+                    <th>综合票房(万)</th>
+                    <th>票房占比</th>
+                    <th>排片场次</th>
+                    <th>排片占比</th>
+                    <th>场均人次</th>
+                    <th>上座率</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for each in data.data.list %}
+                <tr>
+                    <td><span>{{ forloop.counter }}、</span>{{ each.movieName }}</td>
+                    <td>{{ each.boxInfo }}</td>
+                    <td>{{ each.boxRate }}</td>
+                    <td>{{ each.showInfo}}</td>
+                    <td>{{ each.showRate}}</td>
+                    <td>{{ each.avgShowView }}</td>
+                    <td>{{ each.avgSeatView }}</td>
+                </tr>
+                {% empty %}
+                <img src="{% static 'blog/images/404.png' %}">
+                <h1>Data Not Found</h1>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+        {% if data %}
+        <blockquote class="pull-right" style="border-right: none">
+          <small>票房数据来自<cite title="Source Title">猫眼电影</cite></small>
+          <small><a href="https://piaofang.maoyan.com/dashboard" target="_blank">猫眼专业版-实时票房</a></small>
+        </blockquote>
+        {% endif %}
+
+    </div>
+
+
+
+
+
+{% endblock %}
