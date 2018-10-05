@@ -34,6 +34,15 @@ class RegisterForm(forms.ModelForm):
         return cd['password2']
 
 
+
+    def clean_email(self):
+        cd  = self.cleaned_data
+        if cd['email'] == '':
+            self.add_error('email','邮箱不能为空')
+            return None
+        return cd['email']
+
+
     def clean(self):
         """
         验证字段

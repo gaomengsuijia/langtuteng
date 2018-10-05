@@ -220,7 +220,7 @@ class Forgetpassword(View):
                     return render(request,'account/sendemailsuccess.html')
 
                 else:
-                    return render(request, 'account/forgetpassword.html', {'message': '邮件为空','forgetpasswordform':forgetpasswordform})
+                    return render(request, 'account/forgetpassword.html', {'message': '邮件为空，请联系管理员','forgetpasswordform':forgetpasswordform})
             else:
                 return render(request,'account/forgetpassword.html',{'message':'用户名不存在','forgetpasswordform':forgetpasswordform})
         else:

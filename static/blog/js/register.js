@@ -18,7 +18,7 @@ function _delerro(ty) {
 //检验表单字段
 
 function check_data(username,password,password2,nickname,phone,emailVal) {
-    if (username != '' & password !='' & password2 !='' &nickname != ''){
+    if (username != '' & password !='' & password2 !='' &nickname != '' &emailVal != ''){
         //判断username
         var regusername = /^[a-zA-Z]{5,10}$/;
         if (!regusername.test(username)){
