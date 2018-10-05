@@ -5,6 +5,7 @@ from .models import Account,Userinfo
 from django.contrib.auth.models import User
 import re
 from django.core.exceptions import ValidationError
+from captcha.fields import CaptchaField
 
 
 class LoginForm(forms.Form):
@@ -142,3 +143,40 @@ class ChangepasswordForm(forms.Form):
         else:
             self.add_error('new_password',"密码格式不正确")
             return None
+
+
+
+class RestpasswordForm(forms.Form):
+    """
+    重置密码
+    """
+    password1 = forms.CharField(max_length=30)
+    password2 = forms.CharField(max_length=30)
+    email = forms.CharField()
+    captcha = forms.CharField()
+
+    def clean_password2(self):
+        cd  = self.cleaned_data
+        if cd['password1'] != cd['password2']:
+            self.add_error('password2','两次密码不一致')
+            return None
+        return cd['password2']
+
+    def clean(self):
+        clean_data = self.cleaned_data
+        password_re = re.compile(r'^[0-9a-zA-Z]{6,15}$')
+        password1 = clean_data.get('password1','')
+        if re.findall(password_re,password1):
+            return clean_data
+        else:
+            self.add_error('password1','密码格式不正确')
+            return None
+
+
+class ForgetpasswordForm(forms.Form):
+    """
+    忘记密码
+    """
+    username = forms.CharField()
+    captcha = CaptchaField()
+

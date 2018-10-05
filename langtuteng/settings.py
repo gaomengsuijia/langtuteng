@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'account',
     'rest_framework',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -168,3 +169,15 @@ REDIS_HOST = '172.20.2.70'
 REDIS_PORT = 6379
 REDIS_DB = 2
 REDIS_PASSWORD = ''
+
+#邮件配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.qq.com'  # 如果是 163 改成 smtp.163.com
+EMAIL_PORT = 465
+EMAIL_HOST_USER = '2655705334@qq.com' # 帐号
+EMAIL_HOST_PASSWORD = 'sctbcmldsvczdhje'  # 密码
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#重置密码的邮件发送url
+URLTL = '请点击下面的链接:<a href="http://127.0.0.1:8000/account/resetpassword/{}" target="_blank">去重置登录密码</a>'

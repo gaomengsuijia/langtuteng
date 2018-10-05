@@ -22,6 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
+# 验证码路由
+    path('captcha/', include('captcha.urls')),
     path('account/', include('account.urls')),
     re_path("^uploads/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT},),
     re_path('^admin/upload/(?P<dir_name>[^/]+)$', upload_image, name='upload_image')

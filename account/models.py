@@ -28,3 +28,18 @@ class Userinfo(models.Model):
 
     def __str__(self):
         return "user:{}".format(self.user.username)
+
+
+
+class Emailactivecode(models.Model):
+    """
+    邮箱的激活码
+    """
+    email = models.EmailField(max_length=50,verbose_name="发送的邮箱",null=True)
+    email_code = models.CharField(max_length=20,verbose_name="邮箱激活码",null=True)
+    is_delete = models.CharField(max_length=2,verbose_name="是否已经使用",default=0,null=True)
+    send_time = models.DateTimeField(verbose_name="发送时间",auto_now_add=True,null=True)
+    send_type = models.CharField(max_length=40,verbose_name="邮件类型",null=True)
+
+    def __str__(self):
+        return '邮箱是：{0},验证码是：{1}'.format(self.email,self.email_code)

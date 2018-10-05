@@ -1,15 +1,17 @@
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 from django.http import JsonResponse
 from django.urls import reverse
-from .forms import LoginForm,RegisterForm,AcountForm,UserinfoForm,Userform,ChangepasswordForm
+from .forms import LoginForm,RegisterForm,AcountForm,UserinfoForm,Userform,ChangepasswordForm,RestpasswordForm,ForgetpasswordForm
 from django.contrib.auth import authenticate,login,logout
-from .models import Account,Userinfo
+from .models import Account,Userinfo,Emailactivecode
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import base64
 import os
 from langtuteng import settings
 import random
+from django.views.generic.base import View
+from utils.send_email import Sendemail
 # Create your views here.
 
 
@@ -189,4 +191,87 @@ def my_image(request):
             return HttpResponseRedirect(reverse('account:login'))
     else:
         return render(request,'blog/my_image.html')
+
+
+
+class Forgetpassword(View):
+    """
+    忘记密码
+    """
+    def get(self,request,*args,**kwargs):
+        forgetpasswordform = ForgetpasswordForm()
+        print(forgetpasswordform)
+        return render(request,'account/forgetpassword.html',{'forgetpasswordform':forgetpasswordform})
+
+
+    def post(self,request,*args,**kwargs):
+        forgetpasswordform = ForgetpasswordForm(request.POST)
+        if forgetpasswordform.is_valid():
+            #检查username是否存在
+            user = User.objects.filter(username=forgetpasswordform.cleaned_data['username'])
+            if user:
+                #发送邮件
+                email = user[0].email
+                if email:
+                    try:
+                        Sendemail(sendtype='forgetpassword').send(email)
+                    except Exception:
+                        return render(request,'account/forgetpassword.html',{'message':'发送失败','forgetpasswordform':forgetpasswordform})
+                    return render(request,'account/sendemailsuccess.html')
+
+                else:
+                    return render(request, 'account/forgetpassword.html', {'message': '邮件为空','forgetpasswordform':forgetpasswordform})
+            else:
+                return render(request,'account/forgetpassword.html',{'message':'用户名不存在','forgetpasswordform':forgetpasswordform})
+        else:
+            return render(request,'account/forgetpassword.html',{'message':'邮件和用户名不合法','forgetpasswordform':forgetpasswordform})
+
+
+
+
+class Resetpassword(View):
+    """
+    post修改密码
+    """
+    def get(self,request,email_code):
+        """
+        点击邮箱里面的链接激活
+        :param request:
+        :param email_code:
+        :return:
+        """
+        email = Emailactivecode.objects.filter(email_code=email_code,is_delete=0)
+        if email:
+            # Emailactivecode.objects.filter(email_code=email_code).update(is_delete=1)
+            return render(request,'account/resetpassword.html',{'email_code':email_code,'email':email[0].email})
+        return HttpResponseRedirect(reverse('account:login'))
+
+    def post(self,request,*args,**kwargs):
+        restpasswordForm = RestpasswordForm(request.POST)
+        if restpasswordForm.is_valid():
+            email = restpasswordForm.cleaned_data['email']
+            captcha = restpasswordForm.cleaned_data['captcha']
+            captcha_code = Emailactivecode.objects.filter(email=email,email_code=captcha,is_delete=0)
+            if captcha_code:
+                #重置密码
+                newpassword = restpasswordForm.cleaned_data['password1']
+                users = User.objects.filter(email=email)
+                for user in users:
+                    user.set_password(newpassword)
+                    user.save()
+                #将激活码置为失效
+                captcha_code.update(is_delete=1)
+                return render(request,'account/resetsuccess.html')
+            else:
+                return HttpResponseRedirect(reverse('account:login'))
+
+        else:
+            email = restpasswordForm.cleaned_data['email']
+            captcha = restpasswordForm.cleaned_data['captcha']
+            return render(request,'account/resetpassword.html',{'email_code':captcha,'email':email,'restpasswordForm':restpasswordForm})
+
+
+
+
+
 

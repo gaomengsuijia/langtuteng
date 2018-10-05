@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}重置成功{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/account.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="container login_container">
+        <h1 style="text-align: center">尊敬的用户，您好，账户已重置成功！</h1><br>
+        <h2 style="text-align: center">
+            <a href="{% url 'account:login' %}">请点击链接登录账户</a>
+        </h2><br>
+        </div>
+
+{% endblock %}
