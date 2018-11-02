@@ -76,3 +76,23 @@ class Comment(models.Model):
         verbose_name = '评论'
         verbose_name_plural = '评论'
 
+
+
+class Book(models.Model):
+    """
+    电子书
+    """
+    bookname = models.CharField(verbose_name="书名",max_length=50)
+    author = models.CharField(verbose_name="作者",max_length=50)
+    catory = models.CharField(verbose_name="分类",max_length=50)
+    doubanscore = models.CharField(verbose_name="豆瓣评分",max_length=50)
+    about = models.TextField(verbose_name="简介",max_length=500)
+    baidudiskurl = models.URLField(verbose_name="百度下载地址",blank=True)
+
+    def __str__(self):
+        return self.bookname
+
+    class Meta:
+        verbose_name = "电子书"
+        verbose_name_plural = "电子书"
+

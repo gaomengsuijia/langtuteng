@@ -19,4 +19,5 @@ urlpatterns = [
     path('columnlist/<int:column_id>',views.columnlist,name='columnlist'),
     path('suibi/',views.suibi,name='suibi'),
     path('movie/',views.movie,name='movie'),
+    path('booksearch/',views.book_search,name="booksearch"),
 ]

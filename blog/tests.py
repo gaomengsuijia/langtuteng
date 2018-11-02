@@ -26,13 +26,13 @@ def basedecode(base64data):
     :param base64data:
     :return:
     """
-    with open('E:\\file.txt','wb') as f:
+    with open('E:\\file1.txt','wb') as f:
         f.write(base64.b64decode(base64data))
         print("文件保存成功")
 
 
 
 if __name__ == '__main__':
-    base64data = baseencode('E:\Baidu-baidu.csv')
+    base64data = baseencode('E:\\Removed_Package2222.pdf')
     print(base64data)
     basedecode(base64data)

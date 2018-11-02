@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
                 <li {% if request.path == '/' %}class="ac"{% endif %}><a href="{% url 'blog:index' %}">首页</a></li>
-                <li {% if request.path == '/suibi/' %}class="ac"{% endif %}><a href="{% url 'blog:suibi' %}">生活随笔</a></li>
+                <li {% if request.path == '/suibi/' %}class="ac"{% endif %}><a href="{% url 'blog:suibi' %}">一起读</a></li>
                 <li {% if request.path == '/movie/' %}class="ac"{% endif %}><a href="{% url 'blog:movie' %}">最新电影票房</a></li>
             </ul>
 

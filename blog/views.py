@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect,render_to_response
-from .models import Article,ArticleColumn,Thumb,Comment
+from .models import Article,ArticleColumn,Thumb,Comment,Book
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from langtuteng import settings
 import redis
@@ -264,7 +264,34 @@ def suibi(request):
     :param request:
     :return:
     """
-    return render(request,'blog/suibi.html')
+    books = Book.objects.all()
+    page = request.GET.get('page',1)
+    paginator = Paginator(books,20)
+    try:
+        current_page = paginator.page(page)
+        contracts = current_page.object_list
+    except PageNotAnInteger:
+        current_page = paginator.page(1)
+        contracts = current_page.object_list
+    except EmptyPage:
+        current_page = paginator.page(1)
+        contracts = current_page.object_list
+
+
+    return render(request,'blog/suibi.html',{'books':contracts,'page':current_page})
+
+
+def book_search(request):
+    """
+    书籍搜索
+    :param request:
+    :return:
+    """
+    keyword = request.GET.get('keyword','')
+    if keyword.strip() == '':
+        return HttpResponseRedirect(reverse("blog:index"))
+    books = Book.objects.filter(Q(bookname__contains=keyword)|Q(author__contains=keyword))
+    return render(request,'blog/searchbook.html',{'books':books,'keyword':keyword})
 
 
 

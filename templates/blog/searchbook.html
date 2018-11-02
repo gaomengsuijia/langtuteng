@@ -18,7 +18,7 @@
 
                         </div>
                           <div class="col-sm-4 col-xs-4 input-div">
-                              <button  type="submit" class="btn btn-primary" id="booksearch" onclick="return searchbook()">点击搜索</button>
+                              <button type="submit" class="btn btn-primary"  id="booksearch" onclick="return searchbook()">点击搜索</button>
                           </div>
                       </div>
                 </form>
@@ -41,24 +41,12 @@
                     <td>{{ each.author }}</td>
                     <td>45</td>
                 </tr>
+                {% empty %}
+                <span>暂时没有该书</span>
             {% endfor %}
             </tbody>
 
         </table>
-
-                        <!--分页开始-->
-            <div class="pagination" style="float: right">
-                <ul class="pager">
-                {% if page.has_previous %}
-                    <li><a href="?page={{ page.previous_page_number }}">上一页</a></li>
-                {% endif %}
-                {% if page.has_next %}
-                    <li><a href="?page={{ page.next_page_number }}">下一页</a></li>
-                {% endif %}
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-            <!--分页结束-->
         </div>
 
     </div>
