@@ -86,17 +86,20 @@ def index(request):
 
 
 def article_detail(request,article_id):
-    article = Article.objects.get(id=article_id)
-    #浏览量+1
-    total_views = reds.incr('article:{}:views'.format(article_id))
-    #热度+1 ，以后做排序
-    reds.zincrby('article_ranking',article_id,1)
-    #查出总的点赞数
-    total_thumb = article.thumb_article.all().count()
-    #查出所有的评论数
-    all_comment = article.art_comment.filter(is_del=0).order_by('-create_time')
-    return render(request,'blog/article_detail.html',{"article":article,"total_views":total_views,
-                  "total_thumb":total_thumb,"all_comment":all_comment})
+    try:
+        article = Article.objects.get(id=article_id)
+        #浏览量+1
+        total_views = reds.incr('article:{}:views'.format(article_id))
+        #热度+1 ，以后做排序
+        reds.zincrby('article_ranking',article_id,1)
+        #查出总的点赞数
+        total_thumb = article.thumb_article.all().count()
+        #查出所有的评论数
+        all_comment = article.art_comment.filter(is_del=0).order_by('-create_time')
+        return render(request,'blog/article_detail.html',{"article":article,"total_views":total_views,
+                      "total_thumb":total_thumb,"all_comment":all_comment})
+    except Article.DoesNotExist as e:
+        return HttpResponseRedirect(reverse('blog:index'))
 
 
 @csrf_exempt
@@ -279,6 +282,24 @@ def suibi(request):
 
 
     return render(request,'blog/suibi.html',{'books':contracts,'page':current_page})
+
+
+def bookdetail(request,book_id):
+    """
+    书籍详情
+    :param request:
+    :param book_id:
+    :return:
+    """
+    try:
+        book = Book.objects.get(id=book_id)
+        #添加浏览量
+        book.views = str(int(book.views if book.views else 0) + 1)
+        book.save()
+        return render(request,'blog/bookdetail.html',{'book':book})
+    except Book.DoesNotExist as e:
+        return HttpResponseRedirect(reverse('blog:index'))
+
 
 
 def book_search(request):

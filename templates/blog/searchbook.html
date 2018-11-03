@@ -37,9 +37,9 @@
             <tbody>
             {% for each in books %}
                 <tr>
-                    <td><a href="#">{{ each.bookname }}</a></td>
+                    <td><a href="{% url 'blog:bookdetail' each.id %}">{{ each.bookname }}</a></td>
                     <td>{{ each.author }}</td>
-                    <td>45</td>
+                    <td>{{ each.views }}</td>
                 </tr>
                 {% empty %}
                 <span>暂时没有该书</span>

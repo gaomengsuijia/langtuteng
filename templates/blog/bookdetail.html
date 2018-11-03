@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load blog_extras %}
+{% block title %}详情{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'blog/css/book.css' %}">
+{% endblock %}
+{% block body %}
+
+    <div class="container" id="bookdetail-container">
+        <div class="row">
+            <div class="panel panel-default">
+                 <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ book.bookname }}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>作者：{{ book.author }}</p>
+                    <p>分类：{{ book.catory }}</p>
+                    <p>豆瓣评分：{{ book.doubanscore }}</p>
+                    <p>简介：{{ book.about }}</p>
+                </div>
+                <div class="panel-footer" style="color: #1c7430">请联系小编，微信：gaomengsuijia</div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

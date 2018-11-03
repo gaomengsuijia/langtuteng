@@ -4,7 +4,7 @@ function post_like(ar_id){
      $.ajax({
 
                 type: "post",
-                url: "/blog/thumb",
+                url: "/thumb",
                 data: {
                     "article_id": ar_id
                 },
@@ -69,7 +69,7 @@ function post_comment() {
         $.ajax({
 
                 type: "post",
-                url: "/blog/comment",
+                url: "/comment",
                 data: {
                     "replybody":comment,
                     "articleid": article_id,

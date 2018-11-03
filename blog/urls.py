@@ -20,4 +20,5 @@ urlpatterns = [
     path('suibi/',views.suibi,name='suibi'),
     path('movie/',views.movie,name='movie'),
     path('booksearch/',views.book_search,name="booksearch"),
+    path('bookdetail/<int:book_id>',views.bookdetail,name="bookdetail"),
 ]

@@ -9,7 +9,7 @@
                 {% for article in contacts %}
             <li class="list-group-item">
                 <div>
-                    <div><a href="{% url 'blog:article' article.id %}" class="h3 article_title" target="_blank">{{ article.title }}</a></div>
+                    <div><a href="{% url 'blog:article' article.id %}" class="h4 article_title" target="_blank">{{ article.title }}</a></div>
                     <div class="article_content">
                         {{ article.summary | slice:'70' }}
                         <a href="{% url 'blog:article' article.id %}" class="read_full">阅读全文</a>

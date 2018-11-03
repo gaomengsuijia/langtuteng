@@ -88,6 +88,7 @@ class Book(models.Model):
     doubanscore = models.CharField(verbose_name="豆瓣评分",max_length=50)
     about = models.TextField(verbose_name="简介",max_length=500)
     baidudiskurl = models.URLField(verbose_name="百度下载地址",blank=True)
+    views = models.CharField(verbose_name="浏览量",blank=True,max_length=20)
 
     def __str__(self):
         return self.bookname
