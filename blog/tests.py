@@ -33,6 +33,6 @@ def basedecode(base64data):
 
 
 if __name__ == '__main__':
-    base64data = baseencode('E:\\Removed_Package2222.pdf')
+    base64data = baseencode('E:\\gay.jpg')
     print(base64data)
-    basedecode(base64data)
+    # basedecode(base64data)
