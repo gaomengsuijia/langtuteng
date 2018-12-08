@@ -1,9 +1,7 @@
 from django.shortcuts import render,HttpResponseRedirect,render_to_response
 from .models import Article,ArticleColumn,Thumb,Comment,Book
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-from langtuteng import settings
-import redis
-from django.http import HttpResponse,JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db.models import Q
@@ -11,20 +9,6 @@ from django.urls import reverse
 import requests
 import json
 # Create your views here.
-#连接redis
-
-if settings.REDIS_PASSWORD:
-    try:
-        reds = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB,
-                           password=settings.REDIS_PASSWORD)
-    except ConnectionError as e:
-        raise ConnectionError("redis 连接失败")
-else:
-    try:
-        reds = redis.Redis(host=settings.REDIS_HOST,port=settings.REDIS_PORT,db=settings.REDIS_DB)
-    except ConnectionError as e:
-        raise ConnectionError("redis 连接失败")
-
 
 def page_not_found(request):
     """
@@ -64,12 +48,7 @@ def index(request):
     paginator = Paginator(articles,10)
     page = request.GET.get('page', 1)
     #查出阅读排行top5的文章
-    # 钱5
-    all_rank = reds.zrange('article_ranking', 0, -1, desc=True)
-    top_rank_ar = all_rank[0:5] if len(all_rank)>=5 else all_rank
-    top_rank_ar_id = [int(i) for i in top_rank_ar]
-    top_rank = list(Article.objects.filter(id__in=top_rank_ar_id))
-    top_rank.sort(key=lambda x: top_rank_ar_id.index(x.id))
+    top_rank = articles.order_by('-views_num')[:5]
 
     try:
         current_page = paginator.page(page)
@@ -89,9 +68,9 @@ def article_detail(request,article_id):
     try:
         article = Article.objects.get(id=article_id)
         #浏览量+1
-        total_views = reds.incr('article:{}:views'.format(article_id))
-        #热度+1 ，以后做排序
-        reds.zincrby('article_ranking',article_id,1)
+        article.views_num += 1
+        article.save()
+        total_views = article.views_num
         #查出总的点赞数
         total_thumb = article.thumb_article.all().count()
         #查出所有的评论数

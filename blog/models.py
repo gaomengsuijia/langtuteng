@@ -32,6 +32,7 @@ class Article(models.Model):
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     update_time = models.DateTimeField(verbose_name="修改时间",blank=True,null=True)
     delflag = models.CharField(verbose_name="删除标志",default=0,max_length=2)
+    views_num = models.IntegerField(verbose_name="浏览量", default=0)
 
     def __str__(self):
         return self.title
@@ -96,4 +97,3 @@ class Book(models.Model):
     class Meta:
         verbose_name = "电子书"
         verbose_name_plural = "电子书"
-
