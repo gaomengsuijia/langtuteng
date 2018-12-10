@@ -218,13 +218,7 @@ def columnlist(request,column_id):
             paginator = Paginator(articles, 10)
             page = request.GET.get('page', 1)
             # 查出阅读排行top5的文章
-            # 钱5
-            all_rank = reds.zrange('article_ranking', 0, -1, desc=True)
-            top_rank_ar = all_rank[0:5] if len(all_rank) >= 5 else all_rank
-            top_rank_ar_id = [int(i) for i in top_rank_ar]
-            top_rank = list(Article.objects.filter(id__in=top_rank_ar_id))
-            top_rank.sort(key=lambda x: top_rank_ar_id.index(x.id))
-
+            top_rank = articles.order_by('-views_num')[:5]
             try:
                 current_page = paginator.page(page)
                 contacts = current_page.object_list
